@@ -1,4 +1,5 @@
-import funkcijos
+from funkcijos import ivesti_pajams, ivesti_islaidas, ziureti_pajamas, ziureti_islaidas, statistika
+
 
 def main():
     print('Sveiki atvyke!')
@@ -14,19 +15,19 @@ def main():
         pasirinkimas = input('Pasirinkimas: ')
 
         if pasirinkimas == '1':  # ivesti pajamas
-            pass
+            ivesti_pajams()
 
         if pasirinkimas == '2':   # ivesti islaidas
-            pass
+            ivesti_islaidas()
 
         if pasirinkimas == '3':   # ziureti pajamas
-            pass
+            ziureti_pajamas()
 
         if pasirinkimas == '4':   # ziureti islaidas
-            pass
+            ziureti_islaidas()
 
         if pasirinkimas == '5':   # statistika
-            pass
+            statistika()
 
         if pasirinkimas == 'q':   # iseiti
             break
