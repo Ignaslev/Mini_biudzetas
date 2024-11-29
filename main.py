@@ -4,14 +4,14 @@ from funkcijos import ivesti_pajams, ivesti_islaidas, ziureti_pajamas, ziureti_i
 def main():
     print('Sveiki atvyke!')
     while True:
-        print('_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _')
-        print('| 1. Ivesti pajamas             |\n'
+        print(' _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n'
+              '| 1. Ivesti pajamas             |\n'
               '| 2. Ivesti islaidas            |\n'
               '| 3. Ziureti pajamas            |\n'
               '| 4. Ziureti islaidas           |\n'
               '| 5. Statistika                 |\n'
-              '| q - iseiti                    |')
-        print('_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _')
+              '| q - iseiti                    |\n'
+              '| _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |\n')
         pasirinkimas = input('Pasirinkimas: ')
 
         if pasirinkimas == '1':  # ivesti pajamas
