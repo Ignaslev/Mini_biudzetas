@@ -18,15 +18,15 @@ def ivesti_pajams():
                 print("File is empty. Starting with an empty list.")
 
     while True:
-        pavadinimas = input('Pajamu saltinis: ')
-        skaicius = input('Pajamos: ')
+        pajamu_pavadinimas = input('Pajamu saltinis: ')
+        pajamu_skaicius = input('Pajamos: ')
         try:
-            skaicius = int(skaicius)
+            pajamu_skaicius = int(pajamu_skaicius)
         except ValueError:
             print("Pajamos turi būti tik skaičiai. Bandykite dar kartą.")
             continue
 
-        pajamos.append([pavadinimas, skaicius, formatted_date])
+        pajamos.append([pajamu_pavadinimas, pajamu_skaicius, formatted_date])
 
         testi = input('"Enter" prideti dar pajamu arba "q" grizti i menu: ')
         if testi == 'q':
@@ -41,7 +41,40 @@ def ivesti_pajams():
 
 
 def ivesti_islaidas():
-    pass
+    islaidos = []
+
+    dt_now = datetime.datetime.now()
+    formatted_date = dt_now.strftime('%Y-%m-%d %H:%M')
+
+    if os.path.exists('islaidos.pickle') and os.path.getsize('islaidos.pickle') > 0:
+        with open('islaidos.pickle', mode='rb') as file:
+            try:
+                islaidos = pickle.load(file)
+            except EOFError:
+                print("Tuscias failas, pradedama su nauju")
+
+
+    while True:
+        islaidu_pavadinimas = input('Islaidu saltinis: ')
+        islaidu_skaicius = input('Isleista: ')
+        try:
+            islaidu_skaicius = int(islaidu_skaicius)
+        except ValueError:
+            print("Pajamos turi būti tik skaičiai. Bandykite dar kartą.")
+            continue
+
+        islaidos.append([islaidu_pavadinimas, islaidu_skaicius, formatted_date])
+
+        testi = input('"Enter" prideti dar pajamu arba "q" grizti i menu: ')
+        if testi == 'q':
+            with open('islaidos.pickle', mode='wb') as file:
+                # noinspection PyTypeChecker
+                pickle.dump(islaidos, file)
+            print("islaidos issaugotos.")
+            print()
+            break
+        else:
+            continue
 
 
 def ziureti_pajamas():
@@ -54,7 +87,12 @@ def ziureti_pajamas():
 
 
 def ziureti_islaidas():
-    pass
+    if os.path.exists('islaidos.pickle') and os.path.getsize('islaidos.pickle') > 0:
+        with open('islaidos.pickle', mode='rb') as file:
+            islaidos = pickle.load(file)
+            print(islaidos)
+    else:
+        print('Kolkas islaidu nera')
 
 
 def statistika():
