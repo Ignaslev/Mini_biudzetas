@@ -3,6 +3,7 @@ import pickle
 import os
 
 
+
 def ivesti_pajams():
     pajamos = []
 
@@ -29,7 +30,7 @@ def ivesti_pajams():
 
         testi = input('"Enter" prideti dar pajamu arba "q" grizti i menu: ')
         if testi == 'q':
-            with open('pajamos.pickle', mode='wb', encoding='utf-8') as file:
+            with open('pajamos.pickle', mode='wb') as file:
                 # noinspection PyTypeChecker
                 pickle.dump(pajamos, file)
             print("Pajamos issaugotos.")
@@ -44,7 +45,12 @@ def ivesti_islaidas():
 
 
 def ziureti_pajamas():
-    pass
+    if os.path.exists('pajamos.pickle') and os.path.getsize('pajamos.pickle') > 0:
+        with open('pajamos.pickle', mode='rb') as file:
+            pajamos = pickle.load(file)
+            print(pajamos)
+    else:
+        print('Kolkas pajamu nera')
 
 
 def ziureti_islaidas():
