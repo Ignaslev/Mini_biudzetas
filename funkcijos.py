@@ -3,7 +3,6 @@ import pickle
 import os
 
 
-
 def ivesti_pajams():
     pajamos = []
 
@@ -53,7 +52,6 @@ def ivesti_islaidas():
             except EOFError:
                 print("Tuscias failas, pradedama su nauju")
 
-
     while True:
         islaidu_pavadinimas = input('Islaidu saltinis: ')
         islaidu_skaicius = input('Isleista: ')
@@ -96,4 +94,44 @@ def ziureti_islaidas():
 
 
 def statistika():
-    pass
+    pajamos = []
+    islaidos = []
+    if os.path.exists('pajamos.pickle') and os.path.getsize('pajamos.pickle') > 0:
+        with open('pajamos.pickle', mode='rb') as file:
+            pajamos = pickle.load(file)
+
+    if os.path.exists('islaidos.pickle') and os.path.getsize('islaidos.pickle') > 0:
+        with open('islaidos.pickle', mode='rb') as file:
+            islaidos = pickle.load(file)
+
+    pajamu_suma = 0
+    for saltinis, alga, data in pajamos:
+        pajamu_suma += alga
+    #
+    pajamu_saltiniai = []
+    for saltinis, alga, data in pajamos:
+        if saltinis.lower() not in pajamu_saltiniai:
+            pajamu_saltiniai.append(saltinis)
+        else:
+            continue
+    #
+    islaidu_suma = 0
+    for saltinis, islaida,data in islaidos:
+        islaidu_suma += islaida
+    #
+    islaidu_saltiniai = []
+    for islaidu_saltinis, islaida, data in islaidos:
+        if islaidu_saltinis.lower() not in islaidu_saltiniai:
+            islaidu_saltiniai.append(islaidu_saltinis)
+        else:
+            continue
+
+    balansas = pajamu_suma - islaidu_suma
+
+    print(f'Pajamu suma yra {pajamu_suma}')
+    print(f'Pajamos gautos is: {pajamu_saltiniai}')
+    print()
+    print(f'Visos islaidos: {islaidu_suma}')
+    print(f'Pinigai isleisti: {islaidu_saltiniai}')
+    print()
+    print(f'Jusu balansas: {balansas}')
