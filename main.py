@@ -6,10 +6,12 @@ def main():
     while True:
         print(' _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n'
               '| 1. Ivesti pajamas             |\n'
-              '| 2. Ivesti islaidas            |\n'
-              '| 3. Ziureti pajamas            |\n'
-              '| 4. Ziureti islaidas           |\n'
-              '| 5. Statistika                 |\n'
+              '| 2. Istrinti pajamas           |\n'
+              '| 3. Ivesti islaidas            |\n'
+              '| 3. Istrinti islaidas          |\n'
+              '| 4. Ziureti pajamas            |\n'
+              '| 5. Ziureti islaidas           |\n'
+              '| 6. Statistika                 |\n'
               '| q - iseiti                    |\n'
               '| _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ |\n')
         pasirinkimas = input('Pasirinkimas: ')

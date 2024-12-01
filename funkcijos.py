@@ -96,6 +96,8 @@ def ziureti_islaidas():
 def statistika():
     pajamos = []
     islaidos = []
+
+    # Uzkraunam pajamas ir islaidas
     if os.path.exists('pajamos.pickle') and os.path.getsize('pajamos.pickle') > 0:
         with open('pajamos.pickle', mode='rb') as file:
             pajamos = pickle.load(file)
@@ -104,34 +106,64 @@ def statistika():
         with open('islaidos.pickle', mode='rb') as file:
             islaidos = pickle.load(file)
 
-    pajamu_suma = 0
-    for saltinis, alga, data in pajamos:
-        pajamu_suma += alga
-    #
-    pajamu_saltiniai = []
-    for saltinis, alga, data in pajamos:
-        if saltinis.lower() not in pajamu_saltiniai:
-            pajamu_saltiniai.append(saltinis)
-        else:
-            continue
-    #
-    islaidu_suma = 0
-    for saltinis, islaida,data in islaidos:
-        islaidu_suma += islaida
-    #
-    islaidu_saltiniai = []
-    for islaidu_saltinis, islaida, data in islaidos:
-        if islaidu_saltinis.lower() not in islaidu_saltiniai:
-            islaidu_saltiniai.append(islaidu_saltinis)
-        else:
-            continue
+    # Pajamos
+    if pajamos:
+        pajamu_suma = sum(alga for _, alga, _ in pajamos)
+        pajamu_saltiniai = list({saltinis.lower() for saltinis, _, _ in pajamos})
 
-    balansas = pajamu_suma - islaidu_suma
+        print(f'Pajamų suma yra {pajamu_suma}')
+        print(f'Pajamos gautos iš: {pajamu_saltiniai}')
 
-    print(f'Pajamu suma yra {pajamu_suma}')
-    print(f'Pajamos gautos is: {pajamu_saltiniai}')
+        # Max ir Min Pajamos
+        visos_algos = [alga for _, alga, _ in pajamos]
+        max_alga = max(visos_algos)
+        min_alga = min(visos_algos)
+
+        for saltinis, alga, _ in pajamos:
+            if alga == max_alga:
+                print(f'Didžiausios pajamos gautos iš {saltinis}, gauta {alga}eur')
+                break
+
+        for saltinis, alga, _ in pajamos:
+            if alga == min_alga:
+                print(f'Mažiausios pajamos gautos iš {saltinis}, gauta {alga}eur')
+                break
+    else:
+        print("Nėra duomenų apie pajamas.")
     print()
-    print(f'Visos islaidos: {islaidu_suma}')
-    print(f'Pinigai isleisti: {islaidu_saltiniai}')
+
+    # Islaidos
+    if islaidos:
+        islaidu_suma = sum(islaida for _, islaida, _ in islaidos)
+        islaidu_saltiniai = list({saltinis.lower() for saltinis, _, _ in islaidos})
+
+        print(f'Visos išlaidos: {islaidu_suma}')
+        print(f'Pinigai išleisti: {islaidu_saltiniai}')
+
+        # Max ir Min Islaidos
+        visos_islaidos = [islaida for _, islaida, _ in islaidos]
+        max_islaida = max(visos_islaidos)
+        min_islaida = min(visos_islaidos)
+
+        for saltinis, islaida, _ in islaidos:
+            if islaida == max_islaida:
+                print(f'Daugiausia išleista {saltinis}, išleista {islaida}eur')
+                break
+
+        for saltinis, islaida, _ in islaidos:
+            if islaida == min_islaida:
+                print(f'Mažiausiai išleista {saltinis}, išleista {islaida}eur')
+                break
+    else:
+        print("Nėra duomenų apie išlaidas.")
     print()
-    print(f'Jusu balansas: {balansas}')
+
+    # Balansas
+    balansas = pajamu_suma - islaidu_suma if pajamos or islaidos else 0
+    print(f'Jūsų balansas: {balansas}')
+
+def istrinti_pajama():
+    pass
+
+def istrinti_islaida():
+    pass
